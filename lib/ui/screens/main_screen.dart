@@ -20,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
 
   /// List of pages to be shown in PageView
   final List<Widget> bottomBarPages = <Widget>[
-    const HomeScreen(),
+     HomeScreen(),
     const DeviceScreen(),
     const ScheduleScreen(),
     const SettingsScreen(),
