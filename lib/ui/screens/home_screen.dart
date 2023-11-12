@@ -285,7 +285,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   height: deviceHeight * 0.2,
                   width: deviceWidth * 0.85,
                   decoration: BoxDecoration(
-                    color: Color(0x40EA51D2),
+                    color: const Color(0x40EA51D2),
                     borderRadius: BorderRadius.circular(deviceWidth * 0.04),
                   ),
                   child: Stack(
