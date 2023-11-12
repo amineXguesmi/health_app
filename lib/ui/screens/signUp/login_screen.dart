@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/ui/screens/main_screen.dart';
 import 'package:health_app/ui/screens/signUp/signup_process.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -166,7 +167,13 @@ class _LoginScreenState extends State<LoginScreen> {
                           height: deviceHeight * 0.03,
                         ),
                         GestureDetector(
-                          onTap: () async {},
+                          onTap: () {
+                            Navigator.of(context).push(
+                              MaterialPageRoute(
+                                builder: (context) => const MainScreen(),
+                              ),
+                            );
+                          },
                           child: Center(
                             child: Container(
                               height: deviceHeight * 0.05,
