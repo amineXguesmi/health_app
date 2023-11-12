@@ -20,23 +20,24 @@ class _MainScreenState extends State<MainScreen> {
 
   /// List of pages to be shown in PageView
   final List<Widget> bottomBarPages = <Widget>[
-    const HomeScreen(),
-    const DeviceScreen(),
-    const ScheduleScreen(),
-    const SettingsScreen(),
-    const StatsScreen(),
-    const HealthScreen(),
+    HomeScreen(),
+    DeviceScreen(),
+    ScheduleScreen(),
+    StatsScreen(),
+    HealthScreen(),
   ];
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: PageView(
-        controller: _pageController,
-        physics: const NeverScrollableScrollPhysics(),
-        children: List.generate(bottomBarPages.length, (index) => bottomBarPages[index]),
+    return SafeArea(
+      child: Scaffold(
+        body: PageView(
+          controller: _pageController,
+          physics: const NeverScrollableScrollPhysics(),
+          children: List.generate(bottomBarPages.length, (index) => bottomBarPages[index]),
+        ),
+        extendBody: true,
+        bottomNavigationBar: BottomNavigation(pageController: _pageController),
       ),
-      extendBody: true,
-      bottomNavigationBar: BottomNavigation(pageController: _pageController),
     );
   }
 }
