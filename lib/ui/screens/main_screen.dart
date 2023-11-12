@@ -22,7 +22,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> bottomBarPages = <Widget>[
     const HomeScreen(),
     const DeviceScreen(),
-    const ScheduleScreen(),
+    ScheduleScreen(),
     const SettingsScreen(),
     const StatsScreen(),
     const HealthScreen(),
