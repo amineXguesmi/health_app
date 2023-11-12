@@ -24,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
     const DeviceScreen(),
     ScheduleScreen(),
     const SettingsScreen(),
-    const StatsScreen(),
+     StatsScreen(),
     const HealthScreen(),
   ];
   @override
