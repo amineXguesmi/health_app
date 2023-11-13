@@ -59,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         String taskSubtitle = 'Time ${index + 1}:00 PM';
 
                         return ListTile(
-                          leading: Container(
+                          leading: SizedBox(
                               width: deviceWidth * 0.1,
                               height: deviceWidth * 0.15,
                               child: Image.asset(icons[index % 4], fit: BoxFit.cover)),
@@ -316,14 +316,14 @@ class _HomeScreenState extends State<HomeScreen> {
                             SliderButton(
                               width: deviceWidth * 0.4,
                               height: deviceHeight * 0.08,
-                              backgroundColor: Color(0x76A7F8FF),
+                              backgroundColor: const Color(0x76A7F8FF),
                               action: () {},
                               dismissible: false,
                               dismissThresholds: 0.6,
                               label: Text(
                                 "Connect",
                                 style: TextStyle(
-                                  color: Color(0xff4a4a4a),
+                                  color: const Color(0xff4a4a4a),
                                   fontWeight: FontWeight.w500,
                                   fontSize: deviceWidth * 0.045,
                                 ),
