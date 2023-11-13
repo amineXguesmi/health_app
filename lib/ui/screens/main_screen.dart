@@ -21,9 +21,9 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> bottomBarPages = <Widget>[
     const HomeScreen(),
     const DeviceScreen(),
-    const ScheduleScreen(),
-    const StatsScreen(),
+    ScheduleScreen(),
     const HealthScreen(),
+    StatsScreen(),
   ];
   @override
   Widget build(BuildContext context) {

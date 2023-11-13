@@ -47,6 +47,7 @@ dependencies:
   flutter_secure_storage: ^9.0.0
   get_it: ^7.6.4
   google_sign_in: ^6.1.6
+  fl_chart: ^0.64.0
 
 dev_dependencies:
   flutter_test:
