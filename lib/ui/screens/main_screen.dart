@@ -6,6 +6,7 @@ import 'package:health_app/ui/screens/home_screen.dart';
 import 'package:health_app/ui/screens/schedule_screen.dart';
 import 'package:health_app/ui/screens/settings_screen.dart';
 import 'package:health_app/ui/screens/stats_screen.dart';
+import 'package:health_app/ui/widgets/bottom_navagation_widget.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
