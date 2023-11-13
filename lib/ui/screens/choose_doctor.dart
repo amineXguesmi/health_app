@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:health_app/ui/screens/choose_date_screen.dart';
 
 class ChooseDoctorScreen extends StatelessWidget {
-  const ChooseDoctorScreen({Key? key});
+  const ChooseDoctorScreen({super.key});
 
   @override
   Widget build(BuildContext context) {

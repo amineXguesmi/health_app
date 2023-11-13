@@ -30,7 +30,7 @@ class StatsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -39,7 +39,7 @@ class StatsScreen extends StatelessWidget {
                   icon: Icons.airline_seat_individual_suite,
                   cardColor: Colors.purple,
                   dummyValue: '8h 30m',
-                  subValues: ['Deep: 3h', 'Light: 4h', 'REM: 1h 30m', 'Awake: 30m'],
+                  subValues: const ['Deep: 3h', 'Light: 4h', 'REM: 1h 30m', 'Awake: 30m'],
                 ),
                 StatCard(
                   name: 'Stress',
@@ -55,7 +55,7 @@ class StatsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -64,7 +64,7 @@ class StatsScreen extends StatelessWidget {
                   icon: Icons.timeline,
                   cardColor: Colors.teal,
                   dummyValue: '70 kg',
-                  subValues: ['Body Fat: 15%'],
+                  subValues: const ['Body Fat: 15%'],
                 ),
                 StatCard(
                   name: 'Blood Pressure',
@@ -74,7 +74,7 @@ class StatsScreen extends StatelessWidget {
                 ),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -145,14 +145,14 @@ class StatCard extends StatelessWidget {
                 size: 30,
                 color: Colors.white,
               ),
-              SizedBox(height: 10),
+              const SizedBox(height: 10),
               Text(
                 name,
-                style: TextStyle(fontSize: 14, color: Colors.white),
+                style: const TextStyle(fontSize: 14, color: Colors.white),
               ),
-              SizedBox(height: 5),
+              const SizedBox(height: 5),
               if (progressValue != null) ...[
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Stack(
                   alignment: Alignment.center,
                   children: [
@@ -163,35 +163,35 @@ class StatCard extends StatelessWidget {
                     ),
                     Text(
                       '${(progressValue! * 100).toInt()}%',
-                      style: TextStyle(fontSize: 12, color: Colors.white),
+                      style: const TextStyle(fontSize: 12, color: Colors.white),
                     ),
                   ],
                 ),
-                SizedBox(height: 10),
+                const SizedBox(height: 10),
                 Text(
                   '$dummyValue $unit',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ] else ...[
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   dummyValue,
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
+                  style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: Colors.white),
                 ),
               ],
               if (minMaxText != null) ...[
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 Text(
                   minMaxText!,
-                  style: TextStyle(fontSize: 12, color: Colors.white),
+                  style: const TextStyle(fontSize: 12, color: Colors.white),
                 ),
               ],
               if (subValues != null) ...[
-                SizedBox(height: 5),
+                const SizedBox(height: 5),
                 for (String subValue in subValues!)
                   Text(
                     subValue,
-                    style: TextStyle(fontSize: 12, color: Colors.white),
+                    style: const TextStyle(fontSize: 12, color: Colors.white),
                   ),
               ],
             ],
