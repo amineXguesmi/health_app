@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:health_app/ui/widgets/loading_request.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/viewmodels/userVM.dart';
 
 class SignUpPassword extends StatefulWidget {
   final TabController tabController;
@@ -59,13 +62,14 @@ class _SignUpPasswordState extends State<SignUpPassword> {
     }
   }
 
-  void continueCallback() {
+  void continueCallback() async {
     if (validatePassword()) {
       setState(() {
         _loading = true;
       });
 
-      ///call with back
+      context.read<UserViewModel>().patient?.password = passwordController.text;
+      await Future.delayed(const Duration(milliseconds: 200));
       setState(() {
         _loading = false;
       });

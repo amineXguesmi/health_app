@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/core/viewmodels/userVM.dart';
 import 'package:health_app/ui/widgets/loading_request.dart';
+import 'package:provider/provider.dart';
 
 class SignUpEmail extends StatefulWidget {
   final TabController tabController;
@@ -59,13 +61,14 @@ class _SignUpEmailState extends State<SignUpEmail> {
     }
   }
 
-  void continueCallback() {
+  void continueCallback() async {
     if (validateEmail()) {
       setState(() {
         _loading = true;
       });
 
-      ///call with back
+      context.read<UserViewModel>().patient?.email = emailController.text;
+      await Future.delayed(const Duration(milliseconds: 200));
       setState(() {
         _loading = false;
       });

@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:health_app/ui/widgets/loading_request.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/viewmodels/userVM.dart';
+import '../main_screen.dart';
 
 class SignUpInfo extends StatefulWidget {
   final TabController tabController;
@@ -55,16 +59,46 @@ class _SignUpInfoState extends State<SignUpInfo> {
     return true;
   }
 
-  void continueCallback() {
+  Future<void> continueCallback() async {
     if (validateData()) {
       setState(() {
         _loading = true;
       });
 
-      ///call with back
+      context.read<UserViewModel>().patient?.gender = selectedGender == 1 ? 'MALE' : 'FEMALE';
+      context.read<UserViewModel>().patient?.height = int.parse(heightController.text);
+      bool result = await context.read<UserViewModel>().createPatient();
+      await Future.delayed(const Duration(milliseconds: 200));
       setState(() {
         _loading = false;
       });
+      if (result && context.mounted) {
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const MainScreen(),
+          ),
+        );
+      } else if (context.mounted) {
+        showDialog(
+            context: context,
+            builder: (context) => const AlertDialog(
+                  title: Center(
+                    child: Text(
+                      'error',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 40,
+                        color: Colors.red,
+                      ),
+                    ),
+                  ),
+                  content: Text(
+                    'error happen where sign up please try sign up again ',
+                  ),
+                ));
+        widget.tabController.index = 0;
+      }
     }
   }
 

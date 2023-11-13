@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/core/viewmodels/userVM.dart';
 import 'package:health_app/ui/screens/choose_doctor.dart';
+import 'package:health_app/ui/widgets/loading_request.dart';
+import 'package:provider/provider.dart';
 
 class HealthScreen extends StatefulWidget {
   const HealthScreen({Key? key}) : super(key: key);
@@ -9,42 +12,52 @@ class HealthScreen extends StatefulWidget {
 }
 
 class _HealthScreenState extends State<HealthScreen> {
+  bool _loading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loading = false;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        decoration: const BoxDecoration(
-          gradient: LinearGradient(
-            begin: Alignment.topCenter,
-            end: Alignment.bottomCenter,
-            colors: [Color(0xFF43ECC0), Color(0xFF008893)],
-          ),
-        ),
-        child: Center(
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                _buildHealthStatusCard(
-                  title: 'Sleep Disorder Detected',
-                  icon: Icons.nights_stay,
-                  color: const Color(0xFFFF4D4D),
+      body: !_loading
+          ? Container(
+              decoration: const BoxDecoration(
+                gradient: LinearGradient(
+                  begin: Alignment.topCenter,
+                  end: Alignment.bottomCenter,
+                  colors: [Color(0xFF43ECC0), Color(0xFF008893)],
                 ),
-                const SizedBox(height: 16.0),
-                _buildHealthStatusCard(
-                  title: 'Good Heart Health',
-                  icon: Icons.favorite,
-                  color: const Color(0xFF66CC66),
+              ),
+              child: Center(
+                child: SingleChildScrollView(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      _buildHealthStatusCard(
+                        title: 'Sleep Disorder Detected',
+                        icon: Icons.nights_stay,
+                        color: const Color(0xFFFF4D4D),
+                      ),
+                      const SizedBox(height: 16.0),
+                      _buildHealthStatusCard(
+                        title: 'Good Heart Health',
+                        icon: Icons.favorite,
+                        color: const Color(0xFF66CC66),
+                      ),
+                      const SizedBox(height: 32.0),
+                      _buildAppointmentCard(),
+                    ],
+                  ),
                 ),
-                const SizedBox(height: 32.0),
-                _buildAppointmentCard(),
-              ],
-            ),
-          ),
-        ),
-      ),
+              ),
+            )
+          : const LoadingRequest(),
     );
   }
 
@@ -122,13 +135,22 @@ class _HealthScreenState extends State<HealthScreen> {
           ),
           const SizedBox(height: 16.0),
           GestureDetector(
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (context) => const ChooseDoctorScreen(),
-                ),
-              );
+            onTap: () async {
+              setState(() {
+                _loading = true;
+              });
+              await context.read<UserViewModel>().getDoctors();
+              setState(() {
+                _loading = false;
+              });
+              if (context.mounted) {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ChooseDoctorScreen(),
+                  ),
+                );
+              }
             },
             child: Container(
               height: 50,

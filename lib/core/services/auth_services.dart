@@ -5,8 +5,6 @@ import 'package:google_sign_in/google_sign_in.dart';
 import 'package:health_app/core/models/patient.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../common/request_header_interceptor.dart';
-
 class AuthService {
   final dioWithToken = Dio();
   final dioWithNoToken = Dio();
@@ -22,25 +20,12 @@ class AuthService {
     ],
   );
   String? _accessToken;
-  String? _refreshToken;
+  get accessToken => _accessToken;
+
   Future<void> init() async {
     try {
+      prefs = await SharedPreferences.getInstance();
       _accessToken = await _storage.read(key: '_accessToken');
-      _refreshToken = await _storage.read(key: '_refreshToken');
-
-      if (_accessToken != null) {
-        dioWithToken.interceptors.addAll([
-          RequestHeaderInterceptor(accessToken: _accessToken!),
-        ]);
-      }
-
-      if (_accessToken != null && _refreshToken != null) {
-        saveTokenLocally();
-      } else {
-        _accessToken = null;
-        _refreshToken = null;
-        saveTokenLocally();
-      }
     } catch (exception) {
       removeUserData();
     }
@@ -48,13 +33,10 @@ class AuthService {
 
   Future<void> saveTokenLocally() async {
     await _storage.write(key: '_accessToken', value: _accessToken);
-
-    await _storage.write(key: '_refreshToken', value: _refreshToken);
   }
 
   void removeUserData() {
     _accessToken = null;
-    _refreshToken = null;
     _storage.delete(key: '_accessToken');
     _storage.delete(key: '_refreshToken');
   }
@@ -62,18 +44,18 @@ class AuthService {
   Future<PatientModel?> loginViaEmailAndPassword(String email, String password) async {
     try {
       Response response = await dioWithNoToken.post(
-        'url/auth/login',
+        'http://192.168.90.153:3000/auth/login/PATIENT',
         data: {
           'email': email,
           'password': password,
         },
       );
-
-      return await loginTraitement(response);
+      return await loginTraitement(response, email);
     } on DioException catch (e) {
       if (kDebugMode) {
         print(e);
       }
+      return null;
     }
   }
 
@@ -85,10 +67,9 @@ class AuthService {
       var auth = await google?.authentication;
 
       if (auth?.idToken != null) {
-        Response response = await dioWithNoToken.post('url/auth/login-with-google', data: {
+        Response response = await dioWithNoToken.post('http://192.168.90.153:3000/auth/login-with-google', data: {
           'googleToken': auth?.idToken,
         });
-        await loginTraitement(response);
 
         var headers = await google?.authHeaders;
         var googleResponse = await dioWithNoToken.get(
@@ -147,12 +128,11 @@ class AuthService {
     }
   }
 
-  Future<PatientModel?> loginTraitement(Response response) async {
-    _accessToken = response.data["data"]["access_token"];
-    _refreshToken = response.data["data"]["refresh_token"];
-
+  Future<PatientModel?> loginTraitement(Response response, String email) async {
+    _accessToken = response.data["data"]["token"];
+    print(_accessToken);
     await saveTokenLocally();
 
-    return PatientModel.fromJson(response.data["data"]);
+    return PatientModel.fromJson(response.data["data"]['user'], email: email);
   }
 }

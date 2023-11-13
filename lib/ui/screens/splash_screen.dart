@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/core/viewmodels/userVM.dart';
+import 'package:health_app/ui/screens/main_screen.dart';
 import 'package:health_app/ui/screens/signUp/login_screen.dart';
+import 'package:provider/provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -16,6 +19,7 @@ class _SplashScreenState extends State<SplashScreen> with WidgetsBindingObserver
     super.initState();
     bottomSheetHeight = true;
     WidgetsBinding.instance.addObserver(this);
+    context.read<UserViewModel>().init();
   }
 
   @override
@@ -100,7 +104,14 @@ class _SplashScreenState extends State<SplashScreen> with WidgetsBindingObserver
                             bottomSheetHeight = false;
                           });
                           await Future.delayed(const Duration(milliseconds: 300));
-                          if (context.mounted) {
+                          if (context.mounted && context.read<UserViewModel>().patient != null) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => const MainScreen(),
+                              ),
+                            );
+                          } else if (context.mounted) {
                             showModalBottomSheet(
                               isScrollControlled: true,
                               barrierColor: Colors.transparent,

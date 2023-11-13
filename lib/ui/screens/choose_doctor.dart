@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:health_app/core/viewmodels/userVM.dart';
 import 'package:health_app/ui/screens/choose_date_screen.dart';
+import 'package:provider/provider.dart';
 
 class ChooseDoctorScreen extends StatelessWidget {
   const ChooseDoctorScreen({super.key});
@@ -66,14 +68,14 @@ class ChooseDoctorScreen extends StatelessWidget {
                 ),
                 shrinkWrap: true,
                 physics: const ClampingScrollPhysics(), // Set the scroll physics
-                itemCount: 10,
+                itemCount: context.watch<UserViewModel>().doctors?.length ?? 3,
                 itemBuilder: (context, index) {
                   String doctorName = 'Dr. John Doe $index';
                   String specialist = 'Specialty $index';
                   double rating = (index % 5) + 1.0;
                   return _buildDoctorCard(
-                    doctorName: doctorName,
-                    specialist: specialist,
+                    doctorName: context.watch<UserViewModel>().doctors?[index].firstName ?? doctorName,
+                    specialist: context.watch<UserViewModel>().doctors?[index].speciality ?? specialist,
                     rating: rating,
                     context: context,
                   );

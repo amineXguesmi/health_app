@@ -37,7 +37,7 @@ class _DeviceScreenState extends State<DeviceScreen> {
                           fontWeight: FontWeight.w600,
                         ),
                       ),
-                      const SizedBox(height: 20),
+                      SizedBox(height: deviceHeight * 0.02),
                       ListTile(
                         leading: Icon(Icons.watch, color: Colors.green, size: deviceWidth * 0.08),
                         title: Text(

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:health_app/ui/widgets/loading_request.dart';
 import 'package:intl/intl.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/viewmodels/userVM.dart';
 
 class SignUpBirthday extends StatefulWidget {
   final TabController tabController;
@@ -33,7 +36,6 @@ class _SignUpBirthdayState extends State<SignUpBirthday> {
       phoneError = '';
     });
 
-    // Validate Date of Birth
     if (dateInput.text.isEmpty) {
       setState(() {
         dateError = 'Please enter your date of birth';
@@ -53,7 +55,6 @@ class _SignUpBirthdayState extends State<SignUpBirthday> {
       return false;
     }
 
-    // Validate Phone Number
     if (phoneNumberController.text.length != 8) {
       setState(() {
         phoneError = 'invalid phone number';
@@ -64,13 +65,28 @@ class _SignUpBirthdayState extends State<SignUpBirthday> {
     return true;
   }
 
-  void continueCallback() {
+  int calculateAge(DateTime birthDate) {
+    DateTime currentDate = DateTime.now();
+    int age = currentDate.year - birthDate.year;
+
+    // Check if the birthday has occurred this year
+    if (currentDate.month < birthDate.month ||
+        (currentDate.month == birthDate.month && currentDate.day < birthDate.day)) {
+      age--;
+    }
+
+    return age;
+  }
+
+  void continueCallback() async {
     if (validateData()) {
       setState(() {
         _loading = true;
       });
-
-      ///call with back
+      int age = calculateAge(DateFormat('yyyy-MM-dd').parse(dateInput.text));
+      context.read<UserViewModel>().patient?.phoneNumber = phoneNumberController.text;
+      context.read<UserViewModel>().patient?.age = age;
+      await Future.delayed(const Duration(milliseconds: 200));
       setState(() {
         _loading = false;
       });

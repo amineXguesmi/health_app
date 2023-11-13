@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:health_app/ui/widgets/loading_request.dart';
+import 'package:provider/provider.dart';
+
+import '../../../core/viewmodels/userVM.dart';
 
 class SignUpName extends StatefulWidget {
   final TabController tabController;
@@ -14,6 +17,7 @@ class _SignUpNameState extends State<SignUpName> {
   String nameError = '';
   bool _loading = false;
   final TextEditingController nameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   @override
   void initState() {
     super.initState();
@@ -46,13 +50,15 @@ class _SignUpNameState extends State<SignUpName> {
     }
   }
 
-  void continueCallback() {
+  void continueCallback() async {
     if (validateName()) {
       setState(() {
         _loading = true;
       });
 
-      ///call with back
+      context.read<UserViewModel>().patient?.firstName = nameController.text;
+      context.read<UserViewModel>().patient?.lastName = lastNameController.text;
+      await Future.delayed(const Duration(milliseconds: 200));
       setState(() {
         _loading = false;
       });
@@ -140,6 +146,7 @@ class _SignUpNameState extends State<SignUpName> {
                 maxLines: 1,
                 minLines: 1,
                 autofocus: false,
+                controller: lastNameController,
                 keyboardType: TextInputType.text,
                 textInputAction: TextInputAction.done,
                 decoration: InputDecoration(

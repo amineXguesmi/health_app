@@ -1,6 +1,7 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get_it/get_it.dart';
+import 'package:health_app/core/models/doctor.dart';
 
 import 'auth_services.dart';
 
@@ -11,16 +12,36 @@ class UserService {
 
   var dio = Dio();
 
-  Future<void> createUser(body) async {
+  Future<bool> createPatient(body) async {
     try {
-      await dio.put('url/user/update-geolocation',
-          data: body,
-          options: Options(
-              headers: {'Content-Type': 'application/json', 'Authorization': 'Bearer $_authService.accessToken'}));
+      await dio.post('http://192.168.90.153:3000/auth/signup/patient', data: body);
+      return true;
     } catch (e) {
       if (kDebugMode) {
         print(e);
       }
+      return false;
+    }
+  }
+
+  Future<List<DoctorModel>?> getDoctors() async {
+    try {
+      Response response = await dio.get(
+        'http://192.168.90.153:3000/doctor',
+        options: Options(
+          headers: {'Authorization': 'Bearer ${_authService.accessToken!}'},
+        ),
+      );
+      if (response.statusCode! > 299) {
+        return null;
+      }
+      List<DoctorModel> doctors = (response.data["data"] as List<dynamic>).map((e) => DoctorModel.fromJson(e)).toList();
+      return doctors;
+    } catch (e) {
+      if (kDebugMode) {
+        print(e);
+      }
+      return null;
     }
   }
 }
