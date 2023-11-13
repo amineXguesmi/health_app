@@ -13,7 +13,7 @@ class _HealthScreenState extends State<HealthScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -22,7 +22,7 @@ class _HealthScreenState extends State<HealthScreen> {
         ),
         child: Center(
           child: SingleChildScrollView(
-            padding: EdgeInsets.all(16.0),
+            padding: const EdgeInsets.all(16.0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -30,15 +30,15 @@ class _HealthScreenState extends State<HealthScreen> {
                 _buildHealthStatusCard(
                   title: 'Sleep Disorder Detected',
                   icon: Icons.nights_stay,
-                  color: Color(0xFFFF4D4D),
+                  color: const Color(0xFFFF4D4D),
                 ),
-                SizedBox(height: 16.0),
+                const SizedBox(height: 16.0),
                 _buildHealthStatusCard(
                   title: 'Good Heart Health',
                   icon: Icons.favorite,
-                  color: Color(0xFF66CC66),
+                  color: const Color(0xFF66CC66),
                 ),
-                SizedBox(height: 32.0),
+                const SizedBox(height: 32.0),
                 _buildAppointmentCard(),
               ],
             ),
@@ -58,7 +58,7 @@ class _HealthScreenState extends State<HealthScreen> {
         borderRadius: BorderRadius.circular(20),
         color: color.withOpacity(0.8),
       ),
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
           Icon(
@@ -66,21 +66,21 @@ class _HealthScreenState extends State<HealthScreen> {
             size: 40,
             color: Colors.white,
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           Text(
             title,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
               color: Colors.white,
             ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           GestureDetector(
             onTap: () {
               // Add action for "Learn more"
             },
-            child: Row(
+            child: const Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Text(
@@ -109,10 +109,10 @@ class _HealthScreenState extends State<HealthScreen> {
         borderRadius: BorderRadius.circular(20),
         color: Colors.white.withOpacity(0.8),
       ),
-      padding: EdgeInsets.all(16.0),
+      padding: const EdgeInsets.all(16.0),
       child: Column(
         children: [
-          Text(
+          const Text(
             'Book an appointment',
             style: TextStyle(
               fontSize: 24,
@@ -120,13 +120,13 @@ class _HealthScreenState extends State<HealthScreen> {
               color: Color(0xFF1E4C7B),
             ),
           ),
-          SizedBox(height: 16.0),
+          const SizedBox(height: 16.0),
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ChooseDoctorScreen(),
+                  builder: (context) => const ChooseDoctorScreen(),
                 ),
               );
             },
@@ -134,9 +134,9 @@ class _HealthScreenState extends State<HealthScreen> {
               height: 50,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(20),
-                color: Color(0xFF1E4C7B),
+                color: const Color(0xFF1E4C7B),
               ),
-              child: Center(
+              child: const Center(
                 child: Text(
                   'Book Now',
                   style: TextStyle(

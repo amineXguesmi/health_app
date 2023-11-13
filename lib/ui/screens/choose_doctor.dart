@@ -10,7 +10,7 @@ class ChooseDoctorScreen extends StatelessWidget {
       body: Container(
         width: double.infinity,
         height: double.infinity,
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -29,7 +29,7 @@ class ChooseDoctorScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Container(
-                    decoration: BoxDecoration(
+                    decoration: const BoxDecoration(
                       shape: BoxShape.circle,
                       color: Colors.white,
                     ),
@@ -37,11 +37,11 @@ class ChooseDoctorScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.pop(context);
                       },
-                      icon: Icon(Icons.arrow_back_ios),
-                      color: Color(0xFF008893),
+                      icon: const Icon(Icons.arrow_back_ios),
+                      color: const Color(0xFF008893),
                     ),
                   ),
-                  Text(
+                  const Text(
                     'Choose Doctor',
                     style: TextStyle(
                       fontSize: 24,
@@ -49,7 +49,7 @@ class ChooseDoctorScreen extends StatelessWidget {
                       color: Colors.white,
                     ),
                   ),
-                  SizedBox(width: 40), // Add spacing on the right
+                  const SizedBox(width: 40), // Add spacing on the right
                 ],
               ),
             ),
@@ -58,14 +58,14 @@ class ChooseDoctorScreen extends StatelessWidget {
             ),
             Expanded(
               child: GridView.builder(
-                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                   crossAxisCount: 2,
                   childAspectRatio: 0.8, // Adjusted the aspect ratio
                   crossAxisSpacing: 10,
                   mainAxisSpacing: 10,
                 ),
                 shrinkWrap: true,
-                physics: ClampingScrollPhysics(), // Set the scroll physics
+                physics: const ClampingScrollPhysics(), // Set the scroll physics
                 itemCount: 10,
                 itemBuilder: (context, index) {
                   String doctorName = 'Dr. John Doe $index';
@@ -102,7 +102,7 @@ class ChooseDoctorScreen extends StatelessWidget {
             color: Colors.black.withOpacity(0.1),
             spreadRadius: 2,
             blurRadius: 5,
-            offset: Offset(0, 3),
+            offset: const Offset(0, 3),
           ),
         ],
       ),
@@ -115,14 +115,14 @@ class ChooseDoctorScreen extends StatelessWidget {
           ),
           Text(
             doctorName,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
           ),
           Text(
             specialist,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 16,
               fontWeight: FontWeight.bold,
               color: Colors.grey,
@@ -131,13 +131,13 @@ class ChooseDoctorScreen extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
+              const Icon(
                 Icons.star,
                 color: Colors.yellow,
               ),
               Text(
                 rating.toString(),
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 16,
                   fontWeight: FontWeight.bold,
                 ),
@@ -154,7 +154,7 @@ class ChooseDoctorScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
-            child: Text(
+            child: const Text(
               'Book',
               style: TextStyle(
                 fontSize: 16,
@@ -172,7 +172,7 @@ class ChooseDoctorScreen extends StatelessWidget {
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: Colors.white.withOpacity(0.9),
-        title: Text(
+        title: const Text(
           'Confirm Booking',
           style: TextStyle(
             fontWeight: FontWeight.bold,
@@ -185,8 +185,8 @@ class ChooseDoctorScreen extends StatelessWidget {
             Text(
               'Are you sure you want to book an appointment with $doctorName?',
             ),
-            SizedBox(height: 16),
-            Text(
+            const SizedBox(height: 16),
+            const Text(
               'By clicking yes, you authorize us to share your health data with the doctor.',
             ),
           ],
@@ -196,7 +196,7 @@ class ChooseDoctorScreen extends StatelessWidget {
             onPressed: () {
               Navigator.pop(context);
             },
-            child: Text('No'),
+            child: const Text('No'),
           ),
           ElevatedButton(
             onPressed: () {
@@ -204,7 +204,7 @@ class ChooseDoctorScreen extends StatelessWidget {
               Navigator.push(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => ChooseDateScreen(),
+                  builder: (context) => const ChooseDateScreen(),
                 ),
               );
             },
@@ -214,7 +214,7 @@ class ChooseDoctorScreen extends StatelessWidget {
                 borderRadius: BorderRadius.circular(20),
               ),
             ),
-            child: Text('Yes'),
+            child: const Text('Yes'),
           ),
         ],
       ),
