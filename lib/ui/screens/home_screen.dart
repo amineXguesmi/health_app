@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:forked_slider_button/forked_slider_button.dart';
-import 'package:health_app/core/viewmodels/userVM.dart';
 import 'package:health_app/ui/screens/settings_screen.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
-import 'package:provider/provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -111,7 +109,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 Padding(
                   padding: EdgeInsets.only(left: deviceWidth * 0.05),
                   child: Text(
-                    'Hello ${context.read<UserViewModel>().patient?.firstName} ${context.read<UserViewModel>().patient?.lastName} 😊',
+                    'Hello amine guesmi 😊',
                     style: TextStyle(
                       color: Colors.greenAccent,
                       fontSize: deviceWidth * 0.06,

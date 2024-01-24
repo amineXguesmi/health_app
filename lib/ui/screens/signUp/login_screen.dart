@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_app/core/viewmodels/userVM.dart';
 import 'package:health_app/ui/screens/main_screen.dart';
 import 'package:health_app/ui/screens/signUp/signup_process.dart';
-import 'package:provider/provider.dart';
 
 import '../../widgets/loading_request.dart';
 
@@ -87,13 +85,14 @@ class _LoginScreenState extends State<LoginScreen> {
         setState(() {
           _loading = true;
         });
-        bool result =
-            await context.read<UserViewModel>().loginWithEmailPassword(emailController.text, passwordController.text);
-        await Future.delayed(const Duration(milliseconds: 200));
+        // bool result =
+        //     await context.read<UserViewModel>().loginWithEmailPassword(emailController.text, passwordController.text);
+        // await Future.delayed(const Duration(milliseconds: 200));
+        await Future.delayed(const Duration(milliseconds: 250));
         setState(() {
           _loading = false;
         });
-        if (result && context.mounted) {
+        if (context.mounted) {
           Navigator.push(
             context,
             MaterialPageRoute(

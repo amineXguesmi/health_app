@@ -74,8 +74,8 @@ class ChooseDoctorScreen extends StatelessWidget {
                   String specialist = 'Specialty $index';
                   double rating = (index % 5) + 1.0;
                   return _buildDoctorCard(
-                    doctorName: context.watch<UserViewModel>().doctors?[index].firstName ?? doctorName,
-                    specialist: context.watch<UserViewModel>().doctors?[index].speciality ?? specialist,
+                    doctorName: doctorName,
+                    specialist: specialist,
                     rating: rating,
                     context: context,
                   );

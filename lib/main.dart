@@ -18,6 +18,7 @@ void main() async {
       ),
     ],
     child: const MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: SplashScreen(),
     ),
   ));

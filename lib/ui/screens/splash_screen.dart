@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:health_app/core/viewmodels/userVM.dart';
-import 'package:health_app/ui/screens/main_screen.dart';
 import 'package:health_app/ui/screens/signUp/login_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -81,9 +80,9 @@ class _SplashScreenState extends State<SplashScreen> with WidgetsBindingObserver
                         height: deviceHeight * 0.02,
                       ),
                       SizedBox(
-                        height: deviceHeight * 0.14,
+                        height: deviceHeight * 0.16,
                         width: deviceWidth * 0.9,
-                        child: Image.asset(''),
+                        child: Image.asset("assets/logo.png"),
                       ),
                       SizedBox(
                         height: deviceHeight * 0.05,
@@ -104,23 +103,23 @@ class _SplashScreenState extends State<SplashScreen> with WidgetsBindingObserver
                             bottomSheetHeight = false;
                           });
                           await Future.delayed(const Duration(milliseconds: 300));
-                          if (context.mounted && context.read<UserViewModel>().patient != null) {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                builder: (context) => const MainScreen(),
-                              ),
-                            );
-                          } else if (context.mounted) {
-                            showModalBottomSheet(
-                              isScrollControlled: true,
-                              barrierColor: Colors.transparent,
-                              backgroundColor: Colors.transparent,
-                              isDismissible: false,
-                              context: context,
-                              builder: (context) => const LoginScreen(),
-                            );
-                          }
+                          // if (context.mounted && context.read<UserViewModel>().patient != null) {
+                          //   Navigator.push(
+                          //     context,
+                          //     MaterialPageRoute(
+                          //       builder: (context) => const MainScreen(),
+                          //     ),
+                          //   );
+                          // } else if (context.mounted) {
+                          showModalBottomSheet(
+                            isScrollControlled: true,
+                            barrierColor: Colors.transparent,
+                            backgroundColor: Colors.transparent,
+                            isDismissible: false,
+                            context: context,
+                            builder: (context) => const LoginScreen(),
+                          );
+                          // }
                         },
                         child: Container(
                           height: deviceHeight * 0.07,

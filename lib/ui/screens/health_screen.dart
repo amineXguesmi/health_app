@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:health_app/core/viewmodels/userVM.dart';
 import 'package:health_app/ui/screens/choose_doctor.dart';
 import 'package:health_app/ui/widgets/loading_request.dart';
-import 'package:provider/provider.dart';
 
 class HealthScreen extends StatefulWidget {
   const HealthScreen({Key? key}) : super(key: key);
@@ -139,7 +137,8 @@ class _HealthScreenState extends State<HealthScreen> {
               setState(() {
                 _loading = true;
               });
-              await context.read<UserViewModel>().getDoctors();
+              // await context.read<UserViewModel>().getDoctors();
+              await Future.delayed(const Duration(milliseconds: 250));
               setState(() {
                 _loading = false;
               });

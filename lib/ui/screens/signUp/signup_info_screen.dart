@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:health_app/ui/widgets/loading_request.dart';
-import 'package:provider/provider.dart';
 
-import '../../../core/viewmodels/userVM.dart';
 import '../main_screen.dart';
 
 class SignUpInfo extends StatefulWidget {
@@ -65,14 +63,14 @@ class _SignUpInfoState extends State<SignUpInfo> {
         _loading = true;
       });
 
-      context.read<UserViewModel>().patient?.gender = selectedGender == 1 ? 'MALE' : 'FEMALE';
-      context.read<UserViewModel>().patient?.height = int.parse(heightController.text);
-      bool result = await context.read<UserViewModel>().createPatient();
+      // context.read<UserViewModel>().patient?.gender = selectedGender == 1 ? 'MALE' : 'FEMALE';
+      // context.read<UserViewModel>().patient?.height = int.parse(heightController.text);
+      // bool result = await context.read<UserViewModel>().createPatient();
       await Future.delayed(const Duration(milliseconds: 200));
       setState(() {
         _loading = false;
       });
-      if (result && context.mounted) {
+      if (context.mounted) {
         Navigator.push(
           context,
           MaterialPageRoute(
